@@ -96,7 +96,26 @@
 
     /* Accessibility focus */
     .card:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  </style>
+  /* === Tweaks: logo size + stronger day background + card contrast (Aug 2025) === */
+/* Bigger logo */
+.brand .logo{ width:64px; height:64px; }
+@media (max-width:640px){ .brand .logo{ width:48px; height:48px; } }
+
+/* Make day background a touch darker so white cards pop */
+[data-theme="light"] body{
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(0,102,204,.10), transparent 60%),
+    radial-gradient(1000px 700px at 100% 15%, rgba(0,102,204,.07), transparent 62%),
+    #ECF1F7;
+}
+
+/* Give cards stronger contrast */
+.card{
+  background:#fff !important;
+  border:1px solid #E6EBF2;
+  box-shadow: 0 8px 30px rgba(16,24,40,.06), 0 2px 8px rgba(16,24,40,.04) !important;
+}
+</style>
 </head>
 <body>
   <div class="container">
@@ -110,7 +129,7 @@
 
     <p class="section-caption">Quick links</p>
     <div class="grid">
-      <a class="card" href="EMS%20Charts%20Field%20Guide.html">
+      <a class="card" href="latest%20ISOS%20EMS%20Protocols%20Final.pdf">
         <h2 class="card-title"><span class="pill">📘</span> EMS Charts Field Guide</h2>
         <p class="card-desc">Professional field staff training guide.</p>
       </a>
@@ -120,7 +139,7 @@
         <p class="card-desc">Structured handoff template & quick reference.</p>
       </a>
 
-      <a class="card" href="qa.html">
+      <a class="card" href="emsCharts%20QA.html">
         <h2 class="card-title"><span class="pill">✅</span> emsCharts QA</h2>
         <p class="card-desc">QA workflow, flags, and standards.</p>
       </a>

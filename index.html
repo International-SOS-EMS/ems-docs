@@ -42,6 +42,21 @@
                   var(--bg);
       color: var(--text);
     }
+    /* Brighter, cleaner look in day mode */
+    [data-theme="light"] body {
+      background: radial-gradient(1100px 750px at 12% -8%, rgba(58,139,239,.18), transparent 60%),
+                  radial-gradient(900px 700px at 105% 0%, rgba(0,102,204,.12), transparent 62%),
+                  var(--bg);
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(58,123,213,.25), transparent 60%),
+                  radial-gradient(900px 700px at 110% 10%, rgba(11,99,206,.25), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
     .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
 
     /* Header */
@@ -87,7 +102,7 @@
   <div class="container">
     <header class="hero">
       <div class="brand">
-        <img src="assets/isosems-logo.svg" alt="International SOS EMS logo" class="logo" />
+        <img src="assets/isosems-logo.png" alt="International SOS EMS logo" class="logo" />
         <h1 class="hero-title">International SOS EMS — Reference Index</h1>
       </div>
       <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle theme">🌙 Night</button>
@@ -98,6 +113,11 @@
       <a class="card" href="EMS%20Charts%20Field%20Guide.html">
         <h2 class="card-title"><span class="pill">📘</span> EMS Charts Field Guide</h2>
         <p class="card-desc">Professional field staff training guide.</p>
+      </a>
+
+      <a class="card" href="MIST.html">
+        <h2 class="card-title"><span class="pill">🧭</span> MIST Report</h2>
+        <p class="card-desc">Structured handoff template & quick reference.</p>
       </a>
 
       <a class="card" href="qa.html">

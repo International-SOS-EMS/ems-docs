@@ -82,10 +82,19 @@
     }
     .toggle:focus-visible{ box-shadow:0 0 0 3px var(--ring) }
 
-    /* Section label */
-    .subtle{
-      margin:18px 4px 14px; font-weight:600; color:#add8e6;
-    }
+    /* Section label (Quick links) */
+	.subtle{
+	margin:18px 4px 14px;
+	font-weight:600;
+	/* Day (on #808080) — high contrast */
+	color:#ffffff;
+}
+
+/* Night (on #0b1220) — warm accent that stands out */
+[data-theme="dark"] .subtle{
+  color:#ffb86b;
+}
+
 
     /* Cards grid */
     .cards{

@@ -58,6 +58,11 @@
     .toggle { background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(6px); }
     .toggle:hover { background: rgba(255,255,255,.26); transform: translateY(-1px); }
 
+    /* Branding (logo) */
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .logo{ width:40px; height:40px; object-fit:contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
+    [data-theme="light"] .logo{ filter:none; }
+
     /* Cards grid */
     .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 22px 0 0; }
     @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -81,7 +86,10 @@
 <body>
   <div class="container">
     <header class="hero">
-      <h1 class="hero-title">International SOS EMS — Reference Index</h1>
+      <div class="brand">
+        <img src="assets/isosems-logo.svg" alt="International SOS EMS logo" class="logo" />
+        <h1 class="hero-title">International SOS EMS — Reference Index</h1>
+      </div>
       <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle theme">🌙 Night</button>
     </header>
 

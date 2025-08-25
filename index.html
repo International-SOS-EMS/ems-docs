@@ -1,168 +1,205 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>International SOS EMS — Reference Index</title>
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Theme tokens */
-    :root {
-      --bg: #0b0e12;          /* base bg for dark */
-      --surface: #12161c;     /* card bg for dark */
-      --text: #e8eef7;        /* primary text */
-      --muted: #a9b3c1;       /* secondary text */
-      --brand1: #0b63ce;      /* blue */
-      --brand2: #3a7bd5;      /* blue lighter */
-      --accent: #ffb86b;      /* highlight */
-      --border: #222a35;      /* card border */
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    [data-theme="light"] {
+    :root{
+      /* Light theme (requested darker grey background) */
       --bg: #808080;
       --surface: #ffffff;
-      --text: #1e2732;
-      --muted: #516074;
-      --brand1: #0066cc;
-      --brand2: #3a8bef;
-      --accent: #ff6b35;
-      --border: #e6eaf0;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --text: #0f172a;        /* slate-900 */
+      --muted: #334155;       /* slate-700 */
+      --card-shadow: 0 8px 24px rgba(0,0,0,.18);
+      --card-shadow-hover: 0 10px 28px rgba(0,0,0,.24);
+      --brand-start:#1f6feb;  /* blue gradient */
+      --brand-end:#0ea5e9;
+      --ring:#60a5fa;
     }
-    :root { color-scheme: light dark; }
+    [data-theme="dark"]{
+      --bg:#0b1220;
+      --surface:#0f1a2b;
+      --text:#e6edf3;
+      --muted:#9fb1c8;
+      --card-shadow: 0 8px 24px rgba(0,0,0,.45);
+      --card-shadow-hover: 0 12px 34px rgba(0,0,0,.55);
+      --brand-start:#2463eb;
+      --brand-end:#22d3ee;
+      --ring:#38bdf8;
+    }
 
-    /* Global */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.55;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(58,123,213,.25), transparent 60%),
-                  radial-gradient(900px 700px at 110% 10%, rgba(11,99,206,.25), transparent 60%),
-                  var(--bg);
-      color: var(--text);
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background: var(--bg);
+      /* very subtle corner bloom so cards pop on both themes */
+      background-image: radial-gradient(1200px 600px at 90% 10%, rgba(255,255,255,.10) 0%, transparent 40%),
+                        radial-gradient(1200px 600px at 10% 30%, rgba(255,255,255,.10) 0%, transparent 45%);
     }
-    /* Brighter, cleaner look in day mode */
-    [data-theme="light"] body {
-      background: radial-gradient(1100px 750px at 12% -8%, rgba(58,139,239,.18), transparent 60%),
-                  radial-gradient(900px 700px at 105% 0%, rgba(0,102,204,.12), transparent 62%),
-                  var(--bg);
+
+    .wrap{
+      max-width: 1040px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
     }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.55;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(58,123,213,.25), transparent 60%),
-                  radial-gradient(900px 700px at 110% 10%, rgba(11,99,206,.25), transparent 60%),
-                  var(--bg);
-      color: var(--text);
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
 
     /* Header */
-    .hero {
-      background: linear-gradient(135deg, var(--brand1), var(--brand2));
-      border-radius: 16px;
-      padding: 22px 24px;
-      box-shadow: var(--shadow);
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    .hero{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background: linear-gradient(135deg,var(--brand-start),var(--brand-end));
+      color:#fff;
+      border-radius:16px;
+      padding:20px 22px;
+      box-shadow: var(--card-shadow);
     }
-    .hero-title { margin: 0; font-size: 1.25rem; letter-spacing: .2px; }
+    .brand{
+      display:flex;align-items:center;gap:14px;
+      font-weight:700;font-size:18px;
+    }
+    .brand img{
+      height:48px; width:auto; border-radius:10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.25);
+      background:#fff; /* in case PNG has no bg */
+    }
 
-    .toggle { border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; font-weight: 700; }
-    .toggle { background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(6px); }
-    .toggle:hover { background: rgba(255,255,255,.26); transform: translateY(-1px); }
+    /* Toggle */
+    .toggle{
+      border:0; outline:0; cursor:pointer;
+      padding:8px 14px; border-radius:999px;
+      color:#0b1220; background:#fff;
+      font-weight:700; display:flex; align-items:center; gap:8px;
+      box-shadow: var(--card-shadow);
+    }
+    .toggle:focus-visible{ box-shadow:0 0 0 3px var(--ring) }
 
-    /* Branding (logo) */
-    .brand{ display:flex; align-items:center; gap:12px; }
-    .logo{ width:40px; height:40px; object-fit:contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
-    [data-theme="light"] .logo{ filter:none; }
+    /* Section label */
+    .subtle{
+      margin:18px 4px 14px; font-weight:600; color:var(--muted);
+    }
 
     /* Cards grid */
-    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 22px 0 0; }
-    @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .cards{
+      display:grid; gap:24px;
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+    }
+    @media (max-width: 900px){
+      .cards{ grid-template-columns: 1fr; }
+      .brand img{ height:40px; }
+    }
 
-    /* Make the whole card clickable by using <a> as the card */
-    .card { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 18px; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.25); border-color: rgba(255,255,255,.18); }
+    .card{
+      display:block; text-decoration:none; color:inherit;
+      background:var(--surface);
+      border-radius:14px;
+      padding:20px 22px;
+      box-shadow: var(--card-shadow);
+      transition: transform .18s ease, box-shadow .18s ease;
+      border:1px solid rgba(0,0,0,.05);
+    }
+    [data-theme="dark"] .card{ border-color: rgba(255,255,255,.06); }
 
-    .card-title { display:flex; align-items:center; gap:10px; font-weight: 800; font-size: 1.05rem; margin: 0; color: #fff; }
-    [data-theme="light"] .card-title { color: #0c2340; }
-    .pill { font-size: 1.1rem; }
-    .card-desc { margin: 6px 0 0; color: var(--muted); font-size: .95rem; }
+    .card:hover{ transform: translateY(-2px); box-shadow: var(--card-shadow-hover); }
+    .card:focus-visible{ outline:0; box-shadow:0 0 0 3px var(--ring), var(--card-shadow-hover); }
 
-    /* Small caption above grids (optional) */
-    .section-caption { margin: 16px 2px -6px; color: var(--muted); font-size: .85rem; }
-
-    /* Accessibility focus */
-    .card:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  /* === Tweaks: logo size + stronger day background + card contrast (Aug 2025) === */
-/* Bigger logo */
-.brand .logo{ width:64px; height:64px; }
-@media (max-width:640px){ .brand .logo{ width:48px; height:48px; } }
-
-/* Make day background a touch darker so white cards pop */
-[data-theme="light"] body{
-  background:
-    radial-gradient(1200px 800px at 50% -10%, rgba(0,102,204,.10), transparent 60%),
-    radial-gradient(1000px 700px at 100% 15%, rgba(0,102,204,.07), transparent 62%),
-    #ECF1F7;
-}
-
-/* Give cards stronger contrast */
-.card{
-  background:#fff !important;
-  border:1px solid #E6EBF2;
-  box-shadow: 0 8px 30px rgba(16,24,40,.06), 0 2px 8px rgba(16,24,40,.04) !important;
-}
-</style>
+    .card h2{
+      margin:0 0 6px;
+      font-size:18px; font-weight:700;
+      display:flex; align-items:center; gap:10px;
+    }
+    .card p{ margin:0; color:var(--muted); font-size:14px; }
+  </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
     <header class="hero">
       <div class="brand">
-        <img src="assets/isosems-logo.png" alt="International SOS EMS logo" class="logo" />
-        <h1 class="hero-title">International SOS EMS — Reference Index</h1>
+        <!-- Update the path if you placed the logo elsewhere -->
+        <img src="assets/isosems-logo.png" alt="International SOS EMS logo" />
+        <span>International SOS EMS — Reference Index</span>
       </div>
-      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle theme">🌙 Night</button>
+      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span><span id="themeText">Night</span>
+      </button>
     </header>
 
-    <p class="section-caption">Quick links</p>
-    <div class="grid">
+    <div class="subtle">Quick links</div>
+
+    <!-- 2×2 cards with emojis -->
+    <div class="cards" id="quick-links">
       <a class="card" href="EMS%20Charts%20Field%20Guide.html">
-  <h2 class="card-title">EMS Charts Field Guide</h2>
-  <p>Professional field staff training guide.</p>
-</a>
+        <h2><span aria-hidden="true">📘</span><span>EMS Charts Field Guide</span></h2>
+        <p>Professional field staff training guide.</p>
+      </a>
 
-<a class="card" href="MIST.html">
-  <h2 class="card-title">MIST Report</h2>
-  <p>Structured handoff template & quick reference.</p>
-</a>
+      <a class="card" href="MIST.html">
+        <h2><span aria-hidden="true">📝</span><span>MIST Report</span></h2>
+        <p>Structured handoff template &amp; quick reference.</p>
+      </a>
 
-<a class="card" href="emsCharts%20QA.html">
-  <h2 class="card-title">emsCharts QA</h2>
-  <p>QA workflow, flags, and standards.</p>
-</a>
+      <a class="card" href="emsCharts%20QA.html">
+        <h2><span aria-hidden="true">✅</span><span>emsCharts QA</span></h2>
+        <p>QA workflow, flags, and standards.</p>
+      </a>
 
-<a class="card" href="latest%20ISOS%20EMS%20Protocols%20Final.pdf">
-  <h2 class="card-title">Protocols (Final)</h2>
-  <p>Official protocols (final).</p>
-</a>
-
+      <a class="card" href="latest%20ISOS%20EMS%20Protocols%20Final.pdf" target="_blank" rel="noopener">
+        <h2><span aria-hidden="true">📄</span><span>Protocols (Final)</span></h2>
+        <p>Official Protocols.</p>
+      </a>
     </div>
   </div>
 
   <script>
     (function(){
-      var root=document.documentElement; var btn=document.getElementById('themeToggle');
-      function set(t){ if(t==='light'){ root.setAttribute('data-theme','light'); btn.textContent='🌙 Night'; btn.setAttribute('aria-pressed','false'); } else { root.removeAttribute('data-theme'); btn.textContent='☀️ Day'; btn.setAttribute('aria-pressed','true'); } }
-      var saved=null; try{ saved=localStorage.getItem('theme'); }catch(e){}
-      if(!saved){ try{ saved=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'; }catch(e){ saved='dark'; } }
-      set(saved);
-      btn.addEventListener('click', function(){ var next=(root.getAttribute('data-theme')==='light')?'dark':'light'; set(next); try{ localStorage.setItem('theme',next);}catch(e){} });
-      try{ var m=window.matchMedia('(prefers-color-scheme: light)'); m.addEventListener&&m.addEventListener('change', function(e){ if(!localStorage.getItem('theme')) set(e.matches?'light':'dark'); }); }catch(e){}
+      const root = document.documentElement;
+      const btn  = document.getElementById('themeToggle');
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+
+      function apply(theme){
+        if(theme === 'dark'){
+          root.setAttribute('data-theme','dark');
+          icon.textContent = '☀️'; text.textContent = 'Day';
+          btn.setAttribute('aria-pressed','true');
+        }else{
+          root.removeAttribute('data-theme');
+          icon.textContent = '🌙'; text.textContent = 'Night';
+          btn.setAttribute('aria-pressed','false');
+        }
+      }
+
+      let saved = null;
+      try { saved = localStorage.getItem('theme'); } catch(e){}
+      if(!saved){
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        saved = prefersDark ? 'dark' : 'light';
+      }
+      apply(saved);
+
+      btn.addEventListener('click',()=>{
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(next);
+        try{ localStorage.setItem('theme', next); }catch(e){}
+      });
+
+      // Auto-follow OS changes when user hasn't chosen manually
+      try{
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        media.addEventListener('change', (e)=>{
+          const userSet = localStorage.getItem('theme');
+          if(!userSet){ apply(e.matches ? 'dark' : 'light'); }
+        });
+      }catch(e){}
     })();
   </script>
 </body>
 </html>
-

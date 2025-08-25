@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS Documentation Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: #0066CC;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .doc-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .doc-card h3 {
+            color: #0066CC;
+            margin-top: 0;
+        }
+        .doc-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #FF6B35;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .doc-card a:hover {
+            background: #e55a2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>EMS Documentation Portal</h1>
+        <p>Quick access to all operational guides and references</p>
+    </div>
+    
+    <div class="doc-grid">
+        <div class="doc-card">
+            <h3>📚 EMSCharts Field Guide</h3>
+            <p>Complete training guide for EMSCharts documentation system including dispatch, clinical assessment, and QA procedures.</p>
+            <a href="EMS Charts Field Guide.html">Open Field Guide</a>
+        </div>
+        
+        <div class="doc-card">
+            <h3>✅ QA Reviewer Guide</h3>
+            <p>Quality assurance standards and review procedures for EMSCharts documentation.</p>
+            <a href="emsCharts QA.html">Open QA Guide</a>
+        </div>
+        
+        <div class="doc-card">
+            <h3>📋 MIST Report Guide</h3>
+            <p>Field guide for MIST format reports - concise pre-arrival and handover communication.</p>
+            <a href="MIST.html">Open MIST Guide</a>
+        </div>
+    </div>
+</body>
+</html>

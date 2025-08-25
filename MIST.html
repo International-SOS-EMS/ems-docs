@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MIST Report Field Guide</title>
+<style>
+/* ===== Theme Variables ===== */
+:root{
+  --bg:#0f172a;        /* slate-900 */
+  --card:#111827;      /* gray-900 */
+  --muted:#94a3b8;     /* slate-400 */
+  --text:#e5e7eb;      /* gray-200 */
+  --accent:#22d3ee;    /* cyan-400 */
+  --good:#22c55e;      /* green-500 */
+  --warn:#f59e0b;      /* amber-500 */
+  --bad:#ef4444;       /* red-500 */
+  --border:#1f2937;    /* gray-800 */
+  --ring:rgba(34,211,238,.5);
+
+  --radius:16px;
+  --space:1rem;
+  --space-sm:.6rem;
+  --content-max:1200px;
+  --sticky-h:64px;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+h1,h2,h3{line-height:1.2;margin:0 0 .5rem}
+h1{font-size:clamp(1.25rem,2.5vw+1rem,1.9rem)}
+h2{font-size:clamp(1.05rem,1.2vw+1rem,1.35rem);margin-top:.25rem}
+h3{font-size:clamp(1rem,1vw+0.75rem,1.1rem)}
+.lead{color:var(--muted)} .muted{color:var(--muted)} .small{font-size:.9rem}
+
+/* Anchor offset so in-page links don't hide under sticky header */
+[id]{scroll-margin-top:calc(var(--sticky-h) + 14px)}
+
+/* ===== Header / Nav ===== */
+header.app{
+  position:sticky; top:0; z-index:1000;
+  margin:0; padding: .75rem 1rem;
+  background: linear-gradient(180deg, rgba(8,14,24,.9), rgba(8,14,24,.6));
+  border-bottom:1px solid var(--border);
+  backdrop-filter: saturate(120%) blur(6px);
+  height:var(--sticky-h);
+  display:flex; align-items:center; justify-content:center;
+}
+header.app .row{width:100%; max-width:var(--content-max); display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap}
+header.app .brand h1{margin:0;font-size:1.2rem}
+header.app nav a{color:var(--muted);margin-left:.6rem}
+header.app nav a:hover{color:var(--text)}
+
+/* Chip nav */
+.nav{max-width:var(--content-max); margin:.5rem auto 0; padding:0 .75rem .5rem; display:flex; gap:.5rem; overflow-x:auto}
+.nav a{
+  flex:0 0 auto; padding:.42rem .7rem; border:1px solid var(--border);
+  border-radius:999px; background:#0b1220; color:var(--muted);
+}
+.nav a:hover{color:var(--text);border-color:var(--accent)}
+
+/* ===== Layout ===== */
+.wrap{max-width:var(--content-max); margin:0 auto}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:var(--space); margin:.75rem .75rem;
+}
+.grid{display:grid; gap:1rem; margin:0 .75rem}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+
+/* ===== UI elements ===== */
+.callout{border-left:4px solid var(--accent); background:#0b1220; padding:.75rem 1rem; border-radius:8px}
+.callout.tip{border-color:var(--good)} .callout.info{border-color:var(--accent)} .callout.warn{border-color:var(--warn)}
+
+.checklist{list-style:none; padding:0; margin:.5rem 0}
+.checklist li{display:flex; gap:.6rem; align-items:flex-start; margin:.3rem 0}
+.checklist input[type="checkbox"]{
+  width:1.25rem; height:1.25rem; margin-top:.1rem; accent-color:var(--accent);
+}
+
+.codeblock{background:#0b1220; border:1px solid var(--border); border-radius:12px; padding:.6rem .75rem; overflow:auto}
+pre{margin:0; white-space:pre-wrap; word-break:break-word}
+
+.btn{
+  display:inline-block; margin:.5rem .75rem .25rem 0; background:transparent;
+  border:1px solid var(--accent); color:var(--text);
+  padding:.6rem .85rem; border-radius:10px; cursor:pointer; transition:.15s ease;
+  min-height:42px; min-width:44px; /* better tap target */
+}
+.btn:hover{transform:translateY(-1px)}
+
+.example p{margin:.25rem 0}
+
+/* Compact lists */
+.tight{margin:.25rem 0; padding-left:1.1rem}
+.tight li{margin:.15rem 0}
+
+/* Floating back-to-top button on mobile */
+.fab{
+  position:fixed; right:14px; bottom:14px; z-index:999;
+  border-radius:999px; border:1px solid var(--accent);
+  background:#0b1220; color:var(--text);
+  padding:.5rem .7rem; display:none;
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width:640px){
+  .card{margin:.5rem; padding:.85rem}
+  .grid{margin:0 .5rem}
+  header.app .brand h1{font-size:1.05rem}
+}
+
+/* ===== Print ===== */
+@media print{
+  body{background:#fff;color:#000}
+  .nav,.btn,.fab, header.app{display:none}
+  .card{break-inside:avoid; margin:.25in 0; border-color:#ddd}
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto}
+  .btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="app" role="banner">
+  <div class="row">
+    <div class="brand">
+      <h1>EMS Guides</h1>
+      <div class="muted small">Operational Field Reference</div>
+    </div>
+    <nav class="muted small" aria-label="Top">
+      <a href="#format">Format</a> ·
+      <a href="#scripts">Scripts</a> ·
+      <a href="#handover">Handover</a> ·
+      <a href="#variations">Tips</a> ·
+      <a href="#checklists">Checklists</a>
+    </nav>
+  </div>
+</header>
+
+<div class="nav" aria-label="Quick jump">
+  <a href="#format">MIST Format</a>
+  <a href="#scripts">Example Radio Scripts</a>
+  <a href="#handover">ED Handover Flow</a>
+  <a href="#variations">Variations & Tips</a>
+  <a href="#protip">Pro Tip</a>
+  <a href="#checklists">Quick Checklists</a>
+</div>
+
+<div class="wrap">
+  <section class="card" id="intro">
+    <h1>🧭 MIST Report Field Guide</h1>
+    <p class="lead">A fast, standardized way to deliver concise pre-arrival and handover reports—matching the theme of our existing QA/Field Guides.</p>
+    <div class="callout info">
+      <strong>MIST</strong> = <em>Mechanism/Medical Complaint</em>, <em>Injuries/Illness</em>, <em>Signs &amp; Symptoms (incl. vitals)</em>, <em>Treatments &amp; Trends</em>.
+    </div>
+  </section>
+
+  <section class="grid two" id="format">
+    <div class="card">
+      <h2>When to Use</h2>
+      <ul class="tight">
+        <li>🚑 <strong>Pre-alert / En route</strong> radio to the receiving facility.</li>
+        <li>🏥 <strong>ED handover</strong> (verbal) with parallel written notes.</li>
+        <li>🔁 <strong>Update reports</strong> if status changes or new findings occur.</li>
+      </ul>
+      <div class="callout tip">
+        Keep it <strong>30–60 seconds</strong> unless asked for more. Lead with time-critical issues (airway, hemorrhage, STEMI/Stroke/Trauma alerts).
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>MIST — Core Format</h2>
+      <ol class="checklist">
+        <li><input type="checkbox" id="m1"><label for="m1"><strong>M</strong> – Mechanism / Medical Complaint: what happened &amp; chief complaint.</label></li>
+        <li><input type="checkbox" id="m2"><label for="m2"><strong>I</strong> – Injuries / Illness: key findings (primary/secondary survey or differential).</label></li>
+        <li><input type="checkbox" id="m3"><label for="m3"><strong>S</strong> – Signs &amp; Symptoms: ABC status, mental status, pain scale, and <strong>current vitals</strong>. Use <strong>GCS subscores</strong>: E#, V#, M# (e.g., E4 V5 M6).</label></li>
+        <li><input type="checkbox" id="m4"><label for="m4"><strong>T</strong> – Treatments &amp; Trends: interventions, meds, response, critical trends.</label></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="card" id="scripts">
+    <h2>Radio Scripts — Examples</h2>
+
+    <h3>Trauma Example (MVC)</h3>
+    <div class="codeblock" id="script_trauma">
+      <pre><code>"&lt;Hospital&gt;, this is &lt;Unit&gt; inbound, ETA 8.
+M: High-speed MVC, restrained driver, frontal intrusion about 30 cm.
+I: Seatbelt sign, chest wall tenderness, obvious L forearm deformity; abdomen soft; pelvis stable.
+S: Airway patent. Breathing tachypneic with equal breath sounds. Circulation cool/diaphoretic; no external bleed. GCS: E4 V4 M6. Vitals: HR 118, BP 98/62 (MAP 74), RR 26, SpO₂ 94% RA.
+T/Trend: O₂ via nasal cannula 4 L (SpO₂→97%), IV 18g NS TKO, forearm splinted; analgesia pending. BP drifting down from 106/70. Request trauma team."</code></pre>
+    </div>
+    <button class="btn" data-copy="#script_trauma" aria-label="Copy trauma script">Copy Trauma Script</button>
+
+    <h3>Medical Example (STEMI)</h3>
+    <div class="codeblock" id="script_medical">
+      <pre><code>"&lt;Hospital&gt;, this is &lt;Unit&gt; inbound, ETA 12.
+M: 62-year-old male with chest pressure ×30 minutes radiating to L arm; nausea.
+I: Risk factors: HTN, smoker. 12-lead shows 2 mm ST elevation in II, III, aVF.
+S: A/B/C intact; pale and diaphoretic; pain 8/10. GCS: E4 V5 M6. Vitals: HR 56, BP 96/60 (MAP 72), RR 20, SpO₂ 96% RA, BGL 128.
+T/Trend: ASA 324 mg chewed, IV 18g, O₂ NRB 10 L (SpO₂ unchanged), nitro withheld due to BP; pain now 6/10. Request cath lab alert."</code></pre>
+    </div>
+    <button class="btn" data-copy="#script_medical" aria-label="Copy medical script">Copy Medical Script</button>
+  </section>
+
+  <section class="grid two" id="handover">
+    <div class="card">
+      <h2>ED Handover (MIST + 30-Second Story)</h2>
+      <p>Deliver MIST first, then a brief, chronological “story” if requested. Hand off monitoring, lines, splints, and meds clearly. Close with Q&amp;A.</p>
+      <ol class="checklist">
+        <li><input type="checkbox" id="h1"><label for="h1">State patient ID/age/sex and alert type (Trauma/Stroke/STEMI/Peds).</label></li>
+        <li><input type="checkbox" id="h2"><label for="h2">Give MIST (concise; current vitals).</label></li>
+        <li><input type="checkbox" id="h3"><label for="h3">State interventions, times, responses, and outstanding risks.</label></li>
+        <li><input type="checkbox" id="h4"><label for="h4">Transfer devices/meds/lines and confirm monitor continuity.</label></li>
+        <li><input type="checkbox" id="h5"><label for="h5">Answer questions, give paperwork/ePCR number, sign out.</label></li>
+      </ol>
+    </div>
+
+    <div class="card" id="tips">
+      <h2>Do / Don’t</h2>
+      <ul class="tight">
+        <li>✅ Lead with life threats and required team alerts.</li>
+        <li>✅ Use <strong>current</strong> vitals and trends (what changed since contact).</li>
+        <li>✅ Keep doses, routes, and times concise and exact.</li>
+        <li>❌ Don’t bury the lead or speculate beyond findings.</li>
+        <li>❌ Don’t read your entire chart—offer to expand if asked.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two" id="variations">
+    <div class="card">
+      <h2>Variations &amp; Tips</h2>
+      <ul class="tight">
+        <li><strong>ATMIST:</strong> Add Age/Time of injury at the start if your service prefers.</li>
+        <li><strong>Pediatrics:</strong> Include weight (kg), Broselow color, and parental consent status.</li>
+        <li><strong>Stroke:</strong> Last known well, FAST-ED/NIHSS, glucose, anticoagulants.</li>
+        <li><strong>Sepsis:</strong> Suspected source, temp, MAP, lactate (if available), fluids/pressors.</li>
+      </ul>
+    </div>
+
+    <div class="card" id="protip">
+      <h2>Pro Tip: Build Before You Key Up</h2>
+      <p>Jot a 4-line skeleton on your glove or ePCR scratchpad:</p>
+      <ul class="tight">
+        <li>M — mechanism/complaint in 1 clause</li>
+        <li>I — top 3 findings/differentials</li>
+        <li>S — ABCs + GCS (E/V/M) + one full set of vitals</li>
+        <li>T — key interventions &amp; trend since last check</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="card" id="checklists">
+    <h2>Quick Checklists</h2>
+    <div class="grid two">
+      <div>
+        <h3>Trauma MIST</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="t1"><label for="t1">Mechanism (speed, intrusion, ejection, helmet, fall height).</label></li>
+          <li><input type="checkbox" id="t2"><label for="t2">Primary survey criticals (airway, breathing, hemorrhage).</label></li>
+          <li><input type="checkbox" id="t3"><label for="t3">Secondary survey top findings (max 3).</label></li>
+          <li><input type="checkbox" id="t4"><label for="t4">GCS subscores and pupils.</label></li>
+          <li><input type="checkbox" id="t5"><label for="t5">Vitals and trends (MAP if hypotensive).</label></li>
+          <li><input type="checkbox" id="t6"><label for="t6">Interventions (fluids, TXA per protocol, splints, analgesia).</label></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Medical MIST</h3>
+        <ul class="checklist">
+          <li><input type="checkbox" id="m11"><label for="m11">Chief complaint onset/duration, severity, modifiers.</label></li>
+          <li><input type="checkbox" id="m12"><label for="m12">Pertinent history/meds/allergies only if they change care.</label></li>
+          <li><input type="checkbox" id="m13"><label for="m13">ABCs, mental status, pain scale.</label></li>
+          <li><input type="checkbox" id="m14"><label for="m14">Vitals and 12-lead/POC results (BGL, SpCO, etc.).</label></li>
+          <li><input type="checkbox" id="m15"><label for="m15">Interventions (ASA, nitro criteria, bronchodilators, glucose).</label></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button id="toTop" class="fab" aria-label="Back to top">↑</button>
+
+<script>
+/* Copy-to-clipboard for each example script */
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('[data-copy]');
+  if(!btn) return;
+  const sel = btn.getAttribute('data-copy');
+  const el = document.querySelector(sel + ' pre');
+  if(!el) return;
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent = 'Copied!';
+    setTimeout(()=>btn.textContent='Copy', 1500);
+  }).catch(()=>{ btn.textContent = 'Press Ctrl/Cmd+C'; });
+});
+
+/* Persist checklist states in localStorage */
+(function(){
+  const KEY_PREFIX = 'mist-guide-v1:';
+  const boxes = Array.from(document.querySelectorAll('input[type="checkbox"][id]'));
+  // Restore
+  boxes.forEach(cb=>{
+    try{
+      const saved = localStorage.getItem(KEY_PREFIX + cb.id);
+      if(saved !== null) cb.checked = saved === '1';
+    }catch(_){}
+  });
+  // Save on change
+  document.addEventListener('change', (e)=>{
+    const cb = e.target;
+    if(cb && cb.matches('input[type="checkbox"][id]')){
+      try{ localStorage.setItem(KEY_PREFIX + cb.id, cb.checked ? '1' : '0'); }catch(_){}
+    }
+  });
+})();
+
+/* Back-to-top button behavior */
+(function(){
+  const btn = document.getElementById('toTop');
+  const onScroll = () => {
+    if(window.scrollY > 600){ btn.style.display='block'; }
+    else { btn.style.display='none'; }
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

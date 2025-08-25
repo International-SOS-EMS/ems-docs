@@ -5,138 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>International SOS EMS — Reference Index</title>
   <style>
+    /* Theme tokens */
     :root {
-      --bg: #ffffff;
-      --fg: #222222;
-      --muted: #666666;
-      --card: #f7f7f9;
-      --link: #0b63ce;
-      --link-hover: #ff6b35;
-      --border: #e5e7eb;
+      --bg: #0b0e12;          /* base bg for dark */
+      --surface: #12161c;     /* card bg for dark */
+      --text: #e8eef7;        /* primary text */
+      --muted: #a9b3c1;       /* secondary text */
+      --brand1: #0b63ce;      /* blue */
+      --brand2: #3a7bd5;      /* blue lighter */
+      --accent: #ffb86b;      /* highlight */
+      --border: #222a35;      /* card border */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    [data-theme="dark"] {
-      --bg: #121212;
-      --fg: #e6e6e6;
-      --muted: #aaaaaa;
-      --card: #1c1f24;
-      --link: #4a9eff;
-      --link-hover: #ffb86b;
-      --border: #2a2f36;
+    [data-theme="light"] {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #1e2732;
+      --muted: #516074;
+      --brand1: #0066cc;
+      --brand2: #3a8bef;
+      --accent: #ff6b35;
+      --border: #e6eaf0;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
     }
-
-    * { box-sizing: border-box; }
     :root { color-scheme: light dark; }
+
+    /* Global */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.55;
-      background: var(--bg);
-      color: var(--fg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(58,123,213,.25), transparent 60%),
+                  radial-gradient(900px 700px at 110% 10%, rgba(11,99,206,.25), transparent 60%),
+                  var(--bg);
+      color: var(--text);
     }
+    .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
 
-    .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
-
-    .header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 20px; margin: 24px 0;
-      background: linear-gradient(135deg, #0066CC, #3A7BD5);
-      color: #fff; border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    /* Header */
+    .hero {
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      border-radius: 16px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-    .header h1 { font-size: 1.35rem; margin: 0; }
+    .hero-title { margin: 0; font-size: 1.25rem; letter-spacing: .2px; }
 
-    .theme-toggle {
-      border: 0; background: var(--fg); color: var(--bg);
-      border-radius: 999px; padding: 10px 14px; font-weight: 600;
-      cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.15); transition: .2s;
-    }
-    .theme-toggle:hover { transform: translateY(-1px); }
-    [data-theme="dark"] .theme-toggle { background: #263241; color: #EAF2FF; }
+    .toggle { border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; font-weight: 700; }
+    .toggle { background: rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(6px); }
+    .toggle:hover { background: rgba(255,255,255,.26); transform: translateY(-1px); }
 
-    .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .list { grid-template-columns: 1fr 1fr; } }
+    /* Cards grid */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 22px 0 0; }
+    @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      padding: 16px 18px; border-radius: 12px; transition: .2s;
-    }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.1); }
-    .card a { display: block; color: var(--link); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
-    .card a:hover { color: var(--link-hover); }
-    .card p { margin: .5rem 0 0; color: var(--muted); }
+    /* Make the whole card clickable by using <a> as the card */
+    .card { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 18px; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.25); border-color: rgba(255,255,255,.18); }
 
-    .footer { margin: 36px 0 16px; color: var(--muted); font-size: .9rem; text-align: center; }
+    .card-title { display:flex; align-items:center; gap:10px; font-weight: 800; font-size: 1.05rem; margin: 0; color: #fff; }
+    [data-theme="light"] .card-title { color: #0c2340; }
+    .pill { font-size: 1.1rem; }
+    .card-desc { margin: 6px 0 0; color: var(--muted); font-size: .95rem; }
+
+    /* Small caption above grids (optional) */
+    .section-caption { margin: 16px 2px -6px; color: var(--muted); font-size: .85rem; }
+
+    /* Accessibility focus */
+    .card:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>International SOS EMS — Reference Index</h1>
-      <button id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙 Night</button>
+    <header class="hero">
+      <h1 class="hero-title">International SOS EMS — Reference Index</h1>
+      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle theme">🌙 Night</button>
+    </header>
+
+    <p class="section-caption">Quick links</p>
+    <div class="grid">
+      <a class="card" href="EMS%20Charts%20Field%20Guide.html">
+        <h2 class="card-title"><span class="pill">📘</span> EMS Charts Field Guide</h2>
+        <p class="card-desc">Professional field staff training guide.</p>
+      </a>
+
+      <a class="card" href="qa.html">
+        <h2 class="card-title"><span class="pill">✅</span> emsCharts QA</h2>
+        <p class="card-desc">QA workflow, flags, and standards.</p>
+      </a>
+
+      <!-- Optional extra link; remove if not needed or update the href to your PDF path -->
+      <a class="card" href="latest%20ISOS%20EMS%20Protocols%20Draft%2023%20July.pdf">
+        <h2 class="card-title"><span class="pill">📄</span> Protocols (PDF)</h2>
+        <p class="card-desc">Latest protocols draft.</p>
+      </a>
     </div>
-
-    <!-- Update these links to match your files/paths -->
-    <ul class="list">
-      <li class="card">
-        <a href="EMS Charts Field Guide.html">EMS Charts Field Guide</a>
-        <p>Professional field staff training guide.</p>
-      </li>
-      <li class="card">
-        <a href="emsCharts QA.html">emsCharts QA</a>
-        <p>QA workflow, flags, and standards.</p>
-      </li>
-      <li class="card">
-        <a href="latest ISOS EMS Protocols Draft 23 July.pdf">Protocols (PDF)</a>
-        <p>Latest protocols draft.</p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-
-    <div class="footer">© International SOS — Training use only</div>
   </div>
 
   <script>
     (function(){
-      var root = document.documentElement;
-      var btn = document.getElementById('themeToggle');
-
-      function applyTheme(theme){
-        if(theme === 'dark'){
-          root.setAttribute('data-theme','dark');
-          btn.textContent = '☀️ Day';
-          btn.setAttribute('aria-pressed','true');
-        } else {
-          root.removeAttribute('data-theme');
-          btn.textContent = '🌙 Night';
-          btn.setAttribute('aria-pressed','false');
-        }
-      }
-
-      var saved = null;
-      try { saved = localStorage.getItem('theme'); } catch(e){}
-      if(!saved){
-        try {
-          saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-        } catch(e) { saved = 'light'; }
-      }
-      applyTheme(saved);
-
-      btn.addEventListener('click', function(){
-        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-        try { localStorage.setItem('theme', next); } catch(e){}
-      });
-
-      try {
-        var media = window.matchMedia('(prefers-color-scheme: dark)');
-        media.addEventListener && media.addEventListener('change', function(e){
-          if(!localStorage.getItem('theme')){
-            applyTheme(e.matches ? 'dark' : 'light');
-          }
-        });
-      } catch(e){}
+      var root=document.documentElement; var btn=document.getElementById('themeToggle');
+      function set(t){ if(t==='light'){ root.setAttribute('data-theme','light'); btn.textContent='🌙 Night'; btn.setAttribute('aria-pressed','false'); } else { root.removeAttribute('data-theme'); btn.textContent='☀️ Day'; btn.setAttribute('aria-pressed','true'); } }
+      var saved=null; try{ saved=localStorage.getItem('theme'); }catch(e){}
+      if(!saved){ try{ saved=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'; }catch(e){ saved='dark'; } }
+      set(saved);
+      btn.addEventListener('click', function(){ var next=(root.getAttribute('data-theme')==='light')?'dark':'light'; set(next); try{ localStorage.setItem('theme',next);}catch(e){} });
+      try{ var m=window.matchMedia('(prefers-color-scheme: light)'); m.addEventListener&&m.addEventListener('change', function(e){ if(!localStorage.getItem('theme')) set(e.matches?'light':'dark'); }); }catch(e){}
     })();
   </script>
 </body>

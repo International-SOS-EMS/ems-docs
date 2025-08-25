@@ -1453,6 +1453,58 @@ table td, table th {
   animation: none !important;
   opacity: 0 !important;
 }
+/* 1) Never dim content by default */
+table, table tbody, table tbody tr, table tbody td,
+.feature-card, .callout, .requirements-box,
+.best-practice, .critical-info {
+opacity: 1 !important;
+filter: none !important;
+}
+
+
+/* 2) Keep hover effects subtle (no opacity changes) */
+table tbody tr:hover,
+.feature-card:hover, .callout:hover, .requirements-box:hover,
+.best-practice:hover, .critical-info:hover {
+opacity: 1 !important;
+filter: none !important;
+box-shadow: var(--shadow-light) !important; /* optional gentle lift */
+}
+
+
+/* 3) Force readable table text in both themes */
+table thead th { color: var(--white) !important; }
+table tbody td { color: var(--dark-gray) !important; }
+[data-theme="dark"] table tbody td { color: #EAEAEA !important; }
+
+
+/* 4) Remove row scaling on hover for accessibility/perf */
+tr:hover { transform: none !important; }
+
+
+/* 5) Dark-mode fixes for warning/requirements so text isn't washed out */
+[data-theme="dark"] .requirements-box,
+[data-theme="dark"] .callout-warning {
+background: #2e2a16 !important; /* deep amber for dark UIs */
+border-color: #FFD24A !important; /* bright amber border */
+color: #F8F8F8 !important; /* high-contrast body text */
+}
+[data-theme="dark"] .requirements-box h4,
+[data-theme="dark"] .callout-warning h4 { color: #FFD24A !important; }
+[data-theme="dark"] .requirements-box ul:not(.checklist) li,
+[data-theme="dark"] .callout-warning ul li { color: #F8F8F8 !important; }
+
+
+/* 6) Other callouts tuned for dark theme */
+[data-theme="dark"] .callout-tip { background: #10304a !important; border-color: #4A9EFF !important; color: #EAF3FF !important; }
+[data-theme="dark"] .callout-danger { background: #3a1216 !important; border-color: #FF7B88 !important; color: #FFD5DA !important; }
+[data-theme="dark"] .callout-success{ background: #10351d !important; border-color: #69D091 !important; color: #DFF8EA !important; }
+[data-theme="dark"] .red-text { color: #FF7B88 !important; }
+
+
+/* 7) Safety net for any helper class */
+.is-dimmed { opacity: 1 !important; filter: none !important; }
+
 </style> </head> <body> <!-- Progress Bar --> <div class="progress-container"> <div class="progress-bar" id="progressBar"></div> </div> <!-- Theme Toggle --> <button aria-label="Toggle dark mode" class="theme-toggle" id="themeToggle">🌙</button> <!-- Mobile Navigation Toggle -->
 <button aria-label="Open navigation menu" class="mobile-nav-toggle" id="mobileNavToggle">📑 Menu</button>
 <!-- Mobile Overlay --> <div aria-hidden="true" class="mobile-overlay" id="mobileOverlay"></div> <div class="header">  <h1>International SOS EMSCharts</h1> <h2>Professional Field Staff Training Guide</h2> <div class="subtitle">Complete Documentation System Reference for International SOS Operations</div> </div> <div class="version-info"> Current Version: EMSCharts Web 14.07 | EMSCharts NOW Mobile 14.0 | EMSCharts PC Application | Training Guide v3.0 - July 2025 </div> <div class="toc" id="table-of-contents"> <h2> Table of Contents <button aria-expanded="true" aria-label="Toggle table of contents" class="toc-collapse-btn" id="tocCollapseBtn">−</button> </h2> <div style="font-size: 0.9em; color: var(--medium-gray); margin-bottom: 15px; font-style: italic;"> 💡 <strong>Quick tip:</strong> Press <kbd style="background: var(--light-gray); padding: 2px 6px; border-radius: 3px; font-family: monospace;">Ctrl+K</kbd> (or <kbd style="background: var(--light-gray); padding: 2px 6px; border-radius: 3px; font-family: monospace;">Cmd+K</kbd> on Mac) to quickly jump back to this table of contents from anywhere in the guide. </div> <ol class="toc-list"> <li><a href="#section1">Platform Overview &amp; System Components</a></li> <li><a href="#section2">System Access &amp; Authentication</a></li> <li><a href="#section3">Page 1: Dispatch Information Requirements</a></li> <li><a href="#section4">Patient Information &amp; Demographics</a></li> <li><a href="#section5">Clinical Assessment Pages (2-5)</a></li> <li><a href="#section6">Page 8: Activity Log &amp; Vital Signs</a></li> <li><a href="#section7">International SOS Narrative Documentation Policy</a></li> <li><a href="#section8">QA Workflow &amp; Flag Response Requirements</a></li> <li><a href="#section9">Mobile Operations &amp; Field Best Practices</a></li> <li><a href="#section10">Forms, Signatures &amp; Attachments</a></li> <li><a href="#section11">Quality Standards &amp; Completion Requirements</a></li> <li><a href="#military-ranks-appendix">Appendix A: Military Ranks &amp; Abbreviations</a></li> </ol> </div> <section class="section" id="section1"> <div class="section-header"> <div class="section-number">1</div> <div class="section-title">Platform Overview &amp; System Components</div> </div>
